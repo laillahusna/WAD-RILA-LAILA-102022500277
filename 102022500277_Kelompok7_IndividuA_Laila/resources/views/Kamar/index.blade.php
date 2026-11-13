@@ -24,6 +24,7 @@
             flex-shrink:0;
         }
         .logo{
+            line-height:0;
             font-size:35px;
             font-weight:bold;
             letter-spacing:5px;
@@ -202,13 +203,13 @@
 <body>
 <div class="layout">
     <aside class="sidebar">
-        <div class="logo">S⌂<br>J B</div>
+        <div class="logo">@include('partials.logo', ['width' => 72])</div>
         <div class="sub">Kelola Kos SJB</div>
         <a class="active" href="{{ route('kamar.index') }}">Master Kamar</a>
         <a href="#">Data Penghuni</a><a href="#">Staff</a><a href="#">Inventaris Aset</a>
     </aside>
     <div class="content">
-        <header class="topbar"><span>Sistem Manajemen Kos &amp; Properti</span><span>Halo, <strong>Admin</strong></span></header>
+        <header class="topbar"><span>Sistem Manajemen Kos &amp; Properti</span>@include('partials.user-info')</header>
         <main>
             <div class="crumb">Beranda / Master Kamar</div>
             <h1>Master Kamar</h1>
@@ -240,10 +241,12 @@
                             <td>
                                 <a class="btn green" href="{{ route('kamar.show', $kamar) }}">Lihat</a>
                                 <a class="btn" href="{{ route('kamar.edit', $kamar) }}">Ubah</a>
+                                @if(auth()->user()->role === 'admin')
                                 <form method="POST" action="{{ route('kamar.destroy', $kamar) }}" style="display:inline" onsubmit="return confirm('Yakin ingin menghapus kamar ini?')">
                                     @csrf @method('DELETE')
                                     <button class="btn danger" type="submit">Hapus</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                     @empty

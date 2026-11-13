@@ -24,6 +24,7 @@
             flex-shrink:0;
         }
         .logo{
+            line-height:0;
             text-align:center;
             font-size:35px;
             font-weight:bold;
@@ -153,7 +154,7 @@
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">S⌂<br>J B</div>
+            <div class="logo">@include('partials.logo', ['width' => 72])</div>
             <p>Kelola Kos SJB</p>
             <a class="active" href="{{ route('kamar.index') }}">Master Kamar</a>
             <a href="#">Data Penghuni</a>
@@ -163,7 +164,7 @@
         <div class="content">
             <header class="topbar">
                 <span>Sistem Manajemen Kos &amp; Properti</span>
-                <span>Halo, <strong>Admin</strong></span>
+                @include('partials.user-info')
             </header>
             <div class="main">
                 <div class="crumb">
